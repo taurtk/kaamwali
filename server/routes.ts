@@ -3,7 +3,7 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertUserSchema, insertWorkerSchema, insertBookingSchema } from "@shared/schema";
 
-export async function registerRoutes(app: Express): Promise<Server> {
+export async function registerRoutes(app: Express): Promise<Server | void> {
   // User routes
   app.post("/api/auth/register", async (req, res) => {
     try {
@@ -198,6 +198,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({ message: "Failed to create transaction", error: error instanceof Error ? error.message : "Unknown error" });
     }
   });
+
+  // For Vercel deployment, don't create server
+  if (process.env.VERCEL) {
+    return;
+  }
 
   const httpServer = createServer(app);
   return httpServer;

@@ -1,0 +1,1683 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SheWorks - Women-Focused Job & Service Marketplace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          borderRadius: {
+            lg: "var(--radius)",
+            md: "calc(var(--radius) - 2px)",
+            sm: "calc(var(--radius) - 4px)",
+          },
+          colors: {
+            background: "var(--background)",
+            foreground: "var(--foreground)",
+            card: {
+              DEFAULT: "var(--card)",
+              foreground: "var(--card-foreground)",
+            },
+            popover: {
+              DEFAULT: "var(--popover)",
+              foreground: "var(--popover-foreground)",
+            },
+            primary: {
+              DEFAULT: "var(--primary)",
+              foreground: "var(--primary-foreground)",
+            },
+            secondary: {
+              DEFAULT: "var(--secondary)",
+              foreground: "var(--secondary-foreground)",
+            },
+            muted: {
+              DEFAULT: "var(--muted)",
+              foreground: "var(--muted-foreground)",
+            },
+            accent: {
+              DEFAULT: "var(--accent)",
+              foreground: "var(--accent-foreground)",
+            },
+            destructive: {
+              DEFAULT: "var(--destructive)",
+              foreground: "var(--destructive-foreground)",
+            },
+            border: "var(--border)",
+            input: "var(--input)",
+            ring: "var(--ring)",
+          },
+          fontFamily: {
+            sans: ["Inter", "system-ui", "sans-serif"],
+          }
+        },
+      }
+    };
+    </script>
+    <style>
+      :root {
+        --background: hsl(210 40% 98%);
+        --foreground: hsl(222.2 84% 4.9%);
+        --card: hsl(0 0% 100%);
+        --card-foreground: hsl(222.2 84% 4.9%);
+        --popover: hsl(0 0% 100%);
+        --popover-foreground: hsl(222.2 84% 4.9%);
+        --primary: hsl(166 76% 40%);
+        --primary-foreground: hsl(210 40% 98%);
+        --secondary: hsl(210 40% 96%);
+        --secondary-foreground: hsl(222.2 47.4% 11.2%);
+        --muted: hsl(210 40% 96%);
+        --muted-foreground: hsl(215.4 16.3% 46.9%);
+        --accent: hsl(350 89% 70%);
+        --accent-foreground: hsl(222.2 84% 4.9%);
+        --destructive: hsl(0 84.2% 60.2%);
+        --destructive-foreground: hsl(210 40% 98%);
+        --border: hsl(214.3 31.8% 91.4%);
+        --input: hsl(214.3 31.8% 91.4%);
+        --ring: hsl(166 76% 40%);
+        --radius: 0.75rem;
+      }
+      
+      .screen {
+        display: none;
+      }
+      
+      .screen.active {
+        display: block;
+      }
+      
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-background text-foreground font-sans">
+    <!-- @COMPONENT: AppContainer -->
+    <div class="max-w-md mx-auto bg-white min-h-screen relative">
+        
+        <!-- Landing Screen -->
+        <div id="landing" class="screen active">
+            <!-- @COMPONENT: LandingHeader -->
+            <div class="text-center pt-16 pb-8 px-6">
+                <div class="inline-flex items-center gap-2 mb-4">
+                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                        <i class="fas fa-users text-white text-lg"></i>
+                    </div>
+                    <h1 class="text-2xl font-bold text-foreground">SheWorks</h1>
+                    <span class="bg-accent text-accent-foreground text-xs px-2 py-1 rounded-full font-medium">Beta</span>
+                </div>
+                <h2 class="text-xl font-semibold text-foreground mb-2">Empowering Women Through Work</h2>
+                <p class="text-muted-foreground text-sm leading-relaxed">Connect with trusted women professionals for all your service needs, or find meaningful work opportunities.</p>
+            </div>
+
+            <!-- @COMPONENT: RoleSelection -->
+            <div class="px-6 space-y-4 mb-8">
+                <h3 class="text-lg font-semibold text-foreground mb-4">Choose how you want to use SheWorks</h3>
+                
+                <button onclick="showScreen('employer-onboarding')" class="w-full p-4 bg-card border border-border rounded-xl text-left hover:shadow-md transition-all">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center">
+                            <i class="fas fa-home text-accent text-lg"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-foreground">Employer / Household</h4>
+                            <p class="text-muted-foreground text-sm">Find and book trusted women workers for your needs</p>
+                        </div>
+                        <i class="fas fa-chevron-right text-muted-foreground"></i>
+                    </div>
+                </button>
+
+                <button onclick="showScreen('worker-dashboard')" class="w-full p-4 bg-card border border-border rounded-xl text-left hover:shadow-md transition-all">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center">
+                            <i class="fas fa-briefcase text-primary text-lg"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-foreground">Worker / Service Provider</h4>
+                            <p class="text-muted-foreground text-sm">Get jobs, manage bookings, and track earnings</p>
+                        </div>
+                        <i class="fas fa-chevron-right text-muted-foreground"></i>
+                    </div>
+                </button>
+            </div>
+
+            <!-- @COMPONENT: QuickPreferences -->
+            <div class="px-6 mb-8">
+                <h3 class="text-lg font-semibold text-foreground mb-4">Quick preferences</h3>
+                <div class="flex gap-3 mb-4">
+                    <button class="px-4 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-medium">English</button>
+                    <button class="px-4 py-2 bg-secondary text-secondary-foreground rounded-lg text-sm font-medium">हिंदी</button>
+                    <button class="px-4 py-2 bg-secondary text-secondary-foreground rounded-lg text-sm font-medium">বাংলা</button>
+                </div>
+                <p class="text-muted-foreground text-xs">You can change this later in Settings.</p>
+            </div>
+
+            <!-- @COMPONENT: GetStartedButton -->
+            <div class="px-6 pb-8">
+                <button onclick="showScreen('auth')" class="w-full bg-primary text-primary-foreground py-4 rounded-xl font-semibold text-base hover:bg-primary/90 transition-colors">
+                    Get Started
+                </button>
+            </div>
+        </div>
+
+        <!-- Auth Screen -->
+        <div id="auth" class="screen">
+            <!-- @COMPONENT: AuthHeader -->
+            <div class="flex items-center justify-between p-4 border-b border-border">
+                <button onclick="showScreen('landing')" class="p-2 hover:bg-secondary rounded-lg">
+                    <i class="fas fa-arrow-left text-foreground"></i>
+                </button>
+                <h1 class="text-lg font-semibold text-foreground">Welcome</h1>
+                <div class="w-10"></div>
+            </div>
+
+            <!-- @COMPONENT: AuthForm -->
+            <div class="p-6">
+                <div class="text-center mb-8">
+                    <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-user-circle text-primary text-3xl"></i>
+                    </div>
+                    <h2 class="text-xl font-semibold text-foreground mb-2">Create your account</h2>
+                    <p class="text-muted-foreground text-sm">Join thousands of women building their careers</p>
+                </div>
+
+                <form class="space-y-4" data-implementation="Handle form submission with validation">
+                    <div>
+                        <label class="block text-sm font-medium text-foreground mb-2">Full Name</label>
+                        <input type="text" placeholder="Enter your full name" class="w-full p-3 border border-border rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent" data-mock="true" />
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-foreground mb-2">Phone Number</label>
+                        <input type="tel" placeholder="+91 98765 43210" class="w-full p-3 border border-border rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent" data-mock="true" />
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-foreground mb-2">Email (Optional)</label>
+                        <input type="email" placeholder="your.email@example.com" class="w-full p-3 border border-border rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent" data-mock="true" />
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-foreground mb-2">I am a...</label>
+                        <select class="w-full p-3 border border-border rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent" data-mock="true">
+                            <option>Worker / Service Provider</option>
+                            <option>Employer / Household</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" onclick="showScreen('home-feed')" class="w-full bg-primary text-primary-foreground py-3 rounded-lg font-semibold mt-6 hover:bg-primary/90 transition-colors">
+                        Continue
+                    </button>
+                </form>
+
+                <div class="text-center mt-6">
+                    <p class="text-muted-foreground text-sm">Already have an account? 
+                        <button onclick="showScreen('home-feed')" class="text-primary font-medium hover:underline">Sign in</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Home Feed Screen -->
+        <div id="home-feed" class="screen">
+            <!-- @COMPONENT: HomeHeader -->
+            <div class="bg-white sticky top-0 z-10 border-b border-border">
+                <div class="flex items-center justify-between p-4">
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-home text-foreground text-lg"></i>
+                        <h1 class="text-lg font-semibold text-foreground">Home</h1>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="relative">
+                            <input type="text" placeholder="Search jobs & services" class="w-64 pl-10 pr-4 py-2 bg-secondary rounded-lg text-sm focus:ring-2 focus:ring-ring" data-mock="true" />
+                            <i class="fas fa-search text-muted-foreground absolute left-3 top-1/2 transform -translate-y-1/2"></i>
+                        </div>
+                        <button class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
+                            <i class="fas fa-user-circle text-primary"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4">
+                <!-- @COMPONENT: LocationHeader -->
+                <div class="flex items-center gap-2 mb-6">
+                    <i class="fas fa-map-marker-alt text-muted-foreground"></i>
+                    <span class="text-muted-foreground text-sm" data-bind="user.location">Mumbai, India</span>
+                </div>
+
+                <!-- @COMPONENT: MainHeading -->
+                <h2 class="text-2xl font-bold text-foreground mb-2">Find trusted help</h2>
+
+                <!-- @COMPONENT: FilterTabs -->
+                <div class="flex gap-3 mb-6">
+                    <button class="px-4 py-2 bg-secondary text-secondary-foreground rounded-lg text-sm font-medium flex items-center gap-2">
+                        <i class="fas fa-sliders-h"></i>
+                        Filters
+                    </button>
+                    <button class="px-4 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-medium">Nearby</button>
+                    <button class="px-4 py-2 bg-secondary text-secondary-foreground rounded-lg text-sm font-medium">Verified</button>
+                </div>
+
+                <!-- @COMPONENT: CategoryBrowser -->
+                <h3 class="text-lg font-semibold text-foreground mb-4">Browse categories</h3>
+                <div class="flex gap-3 mb-8">
+                    <button onclick="showScreen('home-search')" class="px-4 py-2 bg-accent/20 text-accent-foreground rounded-full text-sm font-medium flex items-center gap-2">
+                        <i class="fas fa-spa"></i>
+                        Salon & Spa
+                    </button>
+                    <button onclick="showScreen('home-search')" class="px-4 py-2 bg-accent/20 text-accent-foreground rounded-full text-sm font-medium flex items-center gap-2">
+                        <i class="fas fa-heart"></i>
+                        Caregivers
+                    </button>
+                    <button onclick="showScreen('home-search')" class="px-4 py-2 bg-accent/20 text-accent-foreground rounded-full text-sm font-medium flex items-center gap-2">
+                        <i class="fas fa-broom"></i>
+                        Maids
+                    </button>
+                </div>
+
+                <!-- @COMPONENT: RecommendedWorkers -->
+                <h3 class="text-lg font-semibold text-foreground mb-4">Recommended for you</h3>
+                <div class="space-y-4 mb-8">
+                    <!-- @MAP: workers.map(worker => ( -->
+                    <div class="bg-card border border-border rounded-xl p-4 hover:shadow-md transition-all" data-mock="true">
+                        <div class="flex items-start gap-4">
+                            <div class="relative">
+                                <!-- Professional headshot of a smiling woman with dark hair -->
+                                <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=80&h=80" alt="Anita Sharma" class="w-12 h-12 rounded-full object-cover" />
+                                <div class="absolute -top-1 -right-1 w-4 h-4 bg-primary rounded-full flex items-center justify-center">
+                                    <i class="fas fa-check text-white text-xs"></i>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between mb-1">
+                                    <h4 class="font-semibold text-foreground" data-bind="worker.name">Anita Sharma</h4>
+                                    <div class="flex items-center gap-1">
+                                        <i class="fas fa-star text-yellow-400 text-sm"></i>
+                                        <span class="text-sm font-medium" data-bind="worker.rating">4.8</span>
+                                    </div>
+                                </div>
+                                <p class="text-muted-foreground text-sm mb-2" data-bind="worker.service">Caregiver • 2 km away • ₹400/hr</p>
+                                <div class="flex gap-2 mb-2">
+                                    <span class="px-2 py-1 bg-secondary text-secondary-foreground rounded text-xs">First aid</span>
+                                    <span class="px-2 py-1 bg-secondary text-secondary-foreground rounded text-xs">Elderly care</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-card border border-border rounded-xl p-4 hover:shadow-md transition-all" data-mock="true">
+                        <div class="flex items-start gap-4">
+                            <div class="relative">
+                                <!-- Professional headshot of a woman with medium-length hair smiling -->
+                                <img src="https://pixabay.com/get/gc96a644a06132745039d90cad31ea71998678ae85d9335f14e52601b87e6471781db31435adb7fddc0b6a557c2c664e6b5929c38b6d67538729996f3aef87d1e_1280.jpg" alt="Savita More" class="w-12 h-12 rounded-full object-cover" />
+                                <div class="absolute -top-1 -right-1 w-4 h-4 bg-primary rounded-full flex items-center justify-center">
+                                    <i class="fas fa-check text-white text-xs"></i>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between mb-1">
+                                    <h4 class="font-semibold text-foreground" data-bind="worker.name">Savita More</h4>
+                                    <div class="flex items-center gap-1">
+                                        <i class="fas fa-star text-yellow-400 text-sm"></i>
+                                        <span class="text-sm font-medium" data-bind="worker.rating">4.6</span>
+                                    </div>
+                                </div>
+                                <p class="text-muted-foreground text-sm mb-2" data-bind="worker.service">Housekeeping • 3 km away • ₹300/hr</p>
+                                <div class="flex gap-2 mb-2">
+                                    <span class="px-2 py-1 bg-secondary text-secondary-foreground rounded text-xs">Deep clean</span>
+                                    <span class="px-2 py-1 bg-secondary text-secondary-foreground rounded text-xs">Daily chores</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-card border border-border rounded-xl p-4 hover:shadow-md transition-all" data-mock="true">
+                        <div class="flex items-start gap-4">
+                            <div class="relative">
+                                <!-- Professional headshot of a woman with long dark hair -->
+                                <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=80&h=80" alt="Riya Patel" class="w-12 h-12 rounded-full object-cover" />
+                                <div class="absolute -top-1 -right-1 w-4 h-4 bg-primary rounded-full flex items-center justify-center">
+                                    <i class="fas fa-check text-white text-xs"></i>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between mb-1">
+                                    <h4 class="font-semibold text-foreground" data-bind="worker.name">Riya Patel</h4>
+                                    <div class="flex items-center gap-1">
+                                        <i class="fas fa-star text-yellow-400 text-sm"></i>
+                                        <span class="text-sm font-medium" data-bind="worker.rating">4.9</span>
+                                    </div>
+                                </div>
+                                <p class="text-muted-foreground text-sm mb-2" data-bind="worker.service">Salon at home • 1.2 km • From ₹499</p>
+                                <div class="flex gap-2 mb-2">
+                                    <span class="px-2 py-1 bg-secondary text-secondary-foreground rounded text-xs">Waxing</span>
+                                    <span class="px-2 py-1 bg-secondary text-secondary-foreground rounded text-xs">Facial</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- @END_MAP )) -->
+                </div>
+
+                <!-- @COMPONENT: QuickActions -->
+                <h3 class="text-lg font-semibold text-foreground mb-4">Quick actions</h3>
+                <div class="grid grid-cols-3 gap-4 mb-20">
+                    <button onclick="showScreen('employer-onboarding')" class="p-4 bg-card border border-border rounded-xl text-center hover:shadow-md transition-all">
+                        <i class="fas fa-calendar-plus text-primary text-xl mb-2"></i>
+                        <p class="text-sm font-medium text-foreground">Book now</p>
+                    </button>
+                    <button onclick="showScreen('employer-onboarding')" class="p-4 bg-card border border-border rounded-xl text-center hover:shadow-md transition-all">
+                        <i class="fas fa-plus-circle text-primary text-xl mb-2"></i>
+                        <p class="text-sm font-medium text-foreground">Post a job</p>
+                    </button>
+                    <button class="p-4 bg-card border border-border rounded-xl text-center hover:shadow-md transition-all">
+                        <i class="fas fa-map text-primary text-xl mb-2"></i>
+                        <p class="text-sm font-medium text-foreground">Nearby map</p>
+                    </button>
+                </div>
+            </div>
+
+            <!-- @COMPONENT: BottomNavigation -->
+            <div class="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-md bg-white border-t border-border">
+                <div class="grid grid-cols-4 gap-1">
+                    <button class="p-4 bg-primary text-primary-foreground text-center">
+                        <i class="fas fa-home text-lg mb-1"></i>
+                        <p class="text-xs font-medium">Home</p>
+                    </button>
+                    <button onclick="showScreen('home-search')" class="p-4 text-muted-foreground hover:text-foreground text-center">
+                        <i class="fas fa-search text-lg mb-1"></i>
+                        <p class="text-xs font-medium">Search</p>
+                    </button>
+                    <button onclick="showScreen('wallet')" class="p-4 text-muted-foreground hover:text-foreground text-center">
+                        <i class="fas fa-wallet text-lg mb-1"></i>
+                        <p class="text-xs font-medium">Wallet</p>
+                    </button>
+                    <button onclick="showScreen('profile')" class="p-4 text-muted-foreground hover:text-foreground text-center">
+                        <i class="fas fa-user text-lg mb-1"></i>
+                        <p class="text-xs font-medium">Profile</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Home Search Screen -->
+        <div id="home-search" class="screen">
+            <!-- @COMPONENT: SearchHeader -->
+            <div class="bg-white sticky top-0 z-10 border-b border-border">
+                <div class="flex items-center gap-3 p-4">
+                    <button onclick="showScreen('home-feed')" class="p-2 hover:bg-secondary rounded-lg">
+                        <i class="fas fa-arrow-left text-foreground"></i>
+                    </button>
+                    <h1 class="text-lg font-semibold text-foreground">Home Cleaning</h1>
+                    <span class="bg-accent text-accent-foreground text-xs px-2 py-1 rounded-full font-medium ml-auto">Beta</span>
+                </div>
+                <p class="text-muted-foreground text-sm px-4 pb-4">Filter and view trusted workers available near you.</p>
+            </div>
+
+            <div class="p-4">
+                <!-- @COMPONENT: LocationAndTime -->
+                <div class="bg-card border border-border rounded-xl p-4 mb-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="font-medium text-foreground" data-bind="search.location">Downtown, 10011</span>
+                        <button class="text-accent text-sm font-medium hover:underline">Change</button>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-sm text-muted-foreground mb-1">Date</label>
+                            <span class="text-foreground font-medium" data-bind="search.date">Tue, 18 Jun</span>
+                        </div>
+                        <div>
+                            <label class="block text-sm text-muted-foreground mb-1">Time</label>
+                            <span class="text-foreground font-medium" data-bind="search.time">10:00 AM</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- @COMPONENT: ServiceFilters -->
+                <div class="flex gap-2 mb-4 overflow-x-auto">
+                    <button class="px-4 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-medium whitespace-nowrap">Deep clean</button>
+                    <button class="px-4 py-2 bg-secondary text-secondary-foreground rounded-lg text-sm font-medium whitespace-nowrap">Move-in/out</button>
+                    <button class="px-4 py-2 bg-secondary text-secondary-foreground rounded-lg text-sm font-medium whitespace-nowrap">3-4 hrs</button>
+                    <button class="px-4 py-2 bg-secondary text-secondary-foreground rounded-lg text-sm font-medium whitespace-nowrap">2 BHK</button>
+                </div>
+
+                <button class="text-primary text-sm font-medium mb-6 hover:underline">
+                    <i class="fas fa-sliders-h mr-2"></i>
+                    More filters
+                </button>
+
+                <!-- @COMPONENT: MapView -->
+                <div class="bg-secondary rounded-xl h-48 flex items-center justify-center mb-6 relative">
+                    <!-- Simple map representation with location markers -->
+                    <div class="w-full h-full bg-gradient-to-br from-emerald-100 to-blue-100 rounded-xl relative overflow-hidden">
+                        <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 300%22><rect width=%22400%22 height=%22300%22 fill=%22%23f0f9ff%22/><path d=%22M0 150 Q100 100 200 150 T400 150%22 stroke=%22%2306b6d4%22 stroke-width=%222%22 fill=%22none%22/><circle cx=%22150%22 cy=%22120%22 r=%224%22 fill=%22%2314b8a6%22/><circle cx=%22250%22 cy=%22180%22 r=%224%22 fill=%22%2314b8a6%22/><circle cx=%22200%22 cy=%22150%22 r=%224%22 fill=%22%2314b8a6%22/></svg>'); background-size: cover;"></div>
+                        <div class="absolute bottom-4 left-4 text-xs text-muted-foreground bg-white/80 px-2 py-1 rounded">
+                            Showing available workers within 5 km
+                        </div>
+                    </div>
+                </div>
+
+                <!-- @COMPONENT: AvailableWorkers -->
+                <h3 class="text-lg font-semibold text-foreground mb-4">Available today</h3>
+                <div class="space-y-4 mb-20">
+                    <!-- @MAP: availableWorkers.map(worker => ( -->
+                    <div class="bg-card border border-border rounded-xl p-4 hover:shadow-md transition-all" data-mock="true">
+                        <div class="flex items-start gap-4">
+                            <div class="relative">
+                                <!-- Professional headshot of a woman cleaner with hair tied back -->
+                                <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=80&h=80" alt="Anita Sharma" class="w-12 h-12 rounded-full object-cover" />
+                                <div class="absolute -top-1 -right-1 w-4 h-4 bg-primary rounded-full flex items-center justify-center">
+                                    <i class="fas fa-check text-white text-xs"></i>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between mb-1">
+                                    <h4 class="font-semibold text-foreground" data-bind="worker.name">Anita Sharma</h4>
+                                    <span class="text-lg font-bold text-foreground" data-bind="worker.rate">₹22/hr</span>
+                                </div>
+                                <div class="flex items-center gap-2 mb-2">
+                                    <div class="flex items-center gap-1">
+                                        <i class="fas fa-star text-yellow-400 text-sm"></i>
+                                        <span class="text-sm font-medium" data-bind="worker.rating">4.8</span>
+                                        <span class="text-muted-foreground text-sm">(<span data-bind="worker.reviewCount">210</span>)</span>
+                                    </div>
+                                    <span class="text-muted-foreground text-sm">•</span>
+                                    <span class="bg-primary/10 text-primary text-xs px-2 py-1 rounded">ID verified</span>
+                                    <span class="text-muted-foreground text-sm" data-bind="worker.experience">3 yrs</span>
+                                </div>
+                                <p class="text-muted-foreground text-sm mb-3" data-bind="worker.services">Deep cleaning • Kitchen & bath specialist • Pet friendly</p>
+                                <div class="flex items-center justify-between">
+                                    <span class="px-3 py-1 bg-primary/10 text-primary text-sm rounded-full font-medium">Same-day</span>
+                                    <button onclick="showScreen('worker-profile')" class="px-4 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors">
+                                        View Profile
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-card border border-border rounded-xl p-4 hover:shadow-md transition-all" data-mock="true">
+                        <div class="flex items-start gap-4">
+                            <div class="relative">
+                                <!-- Professional headshot of a woman with brown hair smiling -->
+                                <img src="https://pixabay.com/get/g9af21fff568d0be38eaa783757afa9f03a1ec61f31e40242bc2209c62fcc617c254122b5f75f2c933f978e63f151df76ccf09577bf9abe75799a6fa8fd7e8b47_1280.jpg" alt="Fatima Noor" class="w-12 h-12 rounded-full object-cover" />
+                                <div class="absolute -top-1 -right-1 w-4 h-4 bg-orange-500 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-shield-alt text-white text-xs"></i>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between mb-1">
+                                    <h4 class="font-semibold text-foreground" data-bind="worker.name">Fatima Noor</h4>
+                                    <span class="text-lg font-bold text-foreground" data-bind="worker.rate">₹20/hr</span>
+                                </div>
+                                <div class="flex items-center gap-2 mb-2">
+                                    <div class="flex items-center gap-1">
+                                        <i class="fas fa-star text-yellow-400 text-sm"></i>
+                                        <span class="text-sm font-medium" data-bind="worker.rating">4.7</span>
+                                        <span class="text-muted-foreground text-sm">(<span data-bind="worker.reviewCount">156</span>)</span>
+                                    </div>
+                                    <span class="text-muted-foreground text-sm">•</span>
+                                    <span class="bg-orange-100 text-orange-700 text-xs px-2 py-1 rounded">Background check</span>
+                                    <span class="text-muted-foreground text-sm" data-bind="worker.experience">5 yrs</span>
+                                </div>
+                                <p class="text-muted-foreground text-sm mb-3" data-bind="worker.services">Move-in/out expert • Eco products • Own supplies</p>
+                                <div class="flex items-center justify-between">
+                                    <span class="px-3 py-1 bg-secondary text-secondary-foreground text-sm rounded-full font-medium">Morning</span>
+                                    <button onclick="showScreen('worker-profile')" class="px-4 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors">
+                                        View Profile
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- @END_MAP )) -->
+                </div>
+
+                <!-- @COMPONENT: ContinueToBooking -->
+                <div class="fixed bottom-20 left-1/2 transform -translate-x-1/2 w-full max-w-md px-4">
+                    <button onclick="showScreen('confirm-booking')" class="w-full bg-primary text-primary-foreground py-4 rounded-xl font-semibold text-base hover:bg-primary/90 transition-colors">
+                        Continue to booking
+                    </button>
+                </div>
+            </div>
+
+            <!-- @COMPONENT: BottomNavigation -->
+            <div class="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-md bg-white border-t border-border">
+                <div class="grid grid-cols-4 gap-1">
+                    <button onclick="showScreen('home-feed')" class="p-4 text-muted-foreground hover:text-foreground text-center">
+                        <i class="fas fa-home text-lg mb-1"></i>
+                        <p class="text-xs font-medium">Home</p>
+                    </button>
+                    <button class="p-4 bg-primary text-primary-foreground text-center">
+                        <i class="fas fa-search text-lg mb-1"></i>
+                        <p class="text-xs font-medium">Search</p>
+                    </button>
+                    <button onclick="showScreen('wallet')" class="p-4 text-muted-foreground hover:text-foreground text-center">
+                        <i class="fas fa-wallet text-lg mb-1"></i>
+                        <p class="text-xs font-medium">Wallet</p>
+                    </button>
+                    <button onclick="showScreen('profile')" class="p-4 text-muted-foreground hover:text-foreground text-center">
+                        <i class="fas fa-user text-lg mb-1"></i>
+                        <p class="text-xs font-medium">Profile</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Worker Profile Screen -->
+        <div id="worker-profile" class="screen">
+            <!-- @COMPONENT: WorkerProfileHeader -->
+            <div class="relative">
+                <!-- Clean, modern kitchen interior showing professional cleaning work -->
+                <img src="https://pixabay.com/get/g65b3bccffa0563f677afe76faff37b3a825abdc1019df27e5aefa7af776bde1bb870f9cb70985d52af078ef29dcd1e9410ee7c1382db579398d7f8ea3be5ff7a_1280.jpg" alt="Professional cleaning work showcase" class="w-full h-48 object-cover" />
+                <button onclick="showScreen('home-search')" class="absolute top-4 left-4 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center">
+                    <i class="fas fa-arrow-left text-foreground"></i>
+                </button>
+                <button class="absolute top-4 right-4 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center">
+                    <i class="fas fa-heart text-muted-foreground"></i>
+                </button>
+            </div>
+
+            <div class="p-4">
+                <!-- @COMPONENT: WorkerInfo -->
+                <div class="flex items-start gap-4 mb-6">
+                    <div class="relative">
+                        <!-- Professional headshot of the same woman from earlier screens -->
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=80&h=80" alt="Anita Sharma" class="w-16 h-16 rounded-full object-cover border-4 border-white -mt-8" />
+                        <div class="absolute -bottom-1 -right-1 w-5 h-5 bg-primary rounded-full flex items-center justify-center">
+                            <i class="fas fa-check text-white text-xs"></i>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between mb-1">
+                            <h1 class="text-xl font-bold text-foreground" data-bind="worker.name">Anita Sharma</h1>
+                            <span class="text-xl font-bold text-foreground" data-bind="worker.rate">₹22/hr</span>
+                        </div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <div class="flex items-center gap-1">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <span class="font-semibold" data-bind="worker.rating">4.8</span>
+                                <span class="text-muted-foreground">(<span data-bind="worker.reviewCount">210</span>)</span>
+                            </div>
+                            <span class="text-muted-foreground" data-bind="worker.experience">3 yrs exp</span>
+                            <span class="bg-primary/10 text-primary text-xs px-2 py-1 rounded font-medium">ID Verified</span>
+                        </div>
+                        <div class="flex gap-2 mb-3">
+                            <span class="px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-sm">Deep clean</span>
+                            <span class="px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-sm">Kitchen & Bath</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <span class="px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-sm">Pet friendly</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- @COMPONENT: AvailabilityInfo -->
+                <div class="bg-accent/10 border border-accent/20 rounded-xl p-4 mb-6">
+                    <div class="flex items-center gap-2 mb-2">
+                        <i class="fas fa-map-marker-alt text-accent"></i>
+                        <span class="text-foreground font-medium" data-bind="availability.location">Within 5 km • Tue, 18 Jun • 10:00 AM</span>
+                    </div>
+                    <button class="text-accent text-sm font-medium hover:underline">Edit</button>
+                </div>
+
+                <!-- @COMPONENT: AboutSection -->
+                <div class="mb-6">
+                    <h2 class="text-lg font-semibold text-foreground mb-3">About</h2>
+                    <p class="text-muted-foreground leading-relaxed" data-bind="worker.bio">
+                        Specializes in deep cleaning kitchens and bathrooms. Careful with appliances and surfaces, uses eco-friendly products on request.
+                    </p>
+                </div>
+
+                <!-- @COMPONENT: QuickFacts -->
+                <div class="mb-6">
+                    <h2 class="text-lg font-semibold text-foreground mb-3">Quick facts</h2>
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="text-center">
+                            <div class="text-xl font-bold text-foreground" data-bind="worker.avgDuration">Avg 3.2 hrs</div>
+                            <div class="text-muted-foreground text-sm">Duration</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-xl font-bold text-foreground" data-bind="worker.completedJobs">120 jobs</div>
+                            <div class="text-muted-foreground text-sm">Completed</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-xl font-bold text-foreground" data-bind="worker.backgroundCheck">Background</div>
+                            <div class="text-muted-foreground text-sm">Verified</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- @COMPONENT: PhotoGallery -->
+                <div class="mb-6">
+                    <h2 class="text-lg font-semibold text-foreground mb-3">Photos</h2>
+                    <div class="grid grid-cols-3 gap-3">
+                        <!-- Before and after kitchen cleaning photos -->
+                        <img src="https://pixabay.com/get/g6104333eb6601b370da9e65f74d109312f823fd3113a29d6869b286245fac0ccdbf11fc38a14390893fd362a3fa2a3777ad3bf7b3e3235702333d1c2477bfa8d_1280.jpg" alt="Before cleaning - messy kitchen" class="w-full h-24 object-cover rounded-lg" />
+                        <img src="https://pixabay.com/get/g6104333eb6601b370da9e65f74d109312f823fd3113a29d6869b286245fac0ccdbf11fc38a14390893fd362a3fa2a3777ad3bf7b3e3235702333d1c2477bfa8d_1280.jpg" alt="After cleaning - spotless kitchen" class="w-full h-24 object-cover rounded-lg" />
+                        <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=120&h=120" alt="Clean bathroom results" class="w-full h-24 object-cover rounded-lg" />
+                    </div>
+                </div>
+
+                <!-- @COMPONENT: Reviews -->
+                <div class="mb-6">
+                    <h2 class="text-lg font-semibold text-foreground mb-3">Reviews (<span data-bind="worker.reviewCount">210</span>)</h2>
+                    <div class="space-y-4">
+                        <!-- @MAP: reviews.map(review => ( -->
+                        <div class="border-b border-border pb-4" data-mock="true">
+                            <div class="flex items-start gap-3">
+                                <!-- Review author profile photo -->
+                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=40&h=40" alt="Rina D." class="w-10 h-10 rounded-full object-cover" />
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <h4 class="font-semibold text-foreground" data-bind="review.author">Rina D.</h4>
+                                        <div class="flex items-center gap-1">
+                                            <i class="fas fa-star text-yellow-400 text-sm"></i>
+                                            <span class="text-sm font-medium" data-bind="review.rating">5.0</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-muted-foreground text-sm" data-bind="review.content">
+                                        Fantastic deep clean. Kitchen looks new. On time and very polite.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-b border-border pb-4" data-mock="true">
+                            <div class="flex items-start gap-3">
+                                <!-- Another review author profile photo -->
+                                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=40&h=40" alt="Asha P." class="w-10 h-10 rounded-full object-cover" />
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <h4 class="font-semibold text-foreground" data-bind="review.author">Asha P.</h4>
+                                        <div class="flex items-center gap-1">
+                                            <i class="fas fa-star text-yellow-400 text-sm"></i>
+                                            <span class="text-sm font-medium" data-bind="review.rating">4.8</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-muted-foreground text-sm" data-bind="review.content">
+                                        Great with our pets and very thorough. Highly recommend.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- @END_MAP )) -->
+                    </div>
+                </div>
+
+                <!-- @COMPONENT: WhatsIncluded -->
+                <div class="mb-20">
+                    <h2 class="text-lg font-semibold text-foreground mb-3">What's included</h2>
+                    <div class="grid grid-cols-2 gap-3">
+                        <span class="px-3 py-2 bg-secondary text-secondary-foreground rounded-lg text-sm text-center">Surfaces & dusting</span>
+                        <span class="px-3 py-2 bg-secondary text-secondary-foreground rounded-lg text-sm text-center">Kitchen appliances</span>
+                        <span class="px-3 py-2 bg-secondary text-secondary-foreground rounded-lg text-sm text-center">Bathroom deep clean</span>
+                        <span class="px-3 py-2 bg-secondary text-secondary-foreground rounded-lg text-sm text-center">Floors & mopping</span>
+                    </div>
+                </div>
+
+                <!-- @COMPONENT: BookButton -->
+                <div class="fixed bottom-20 left-1/2 transform -translate-x-1/2 w-full max-w-md px-4">
+                    <button onclick="showScreen('confirm-booking')" class="w-full bg-primary text-primary-foreground py-4 rounded-xl font-semibold text-base hover:bg-primary/90 transition-colors">
+                        Book Anita for Tue, 18 Jun
+                    </button>
+                </div>
+            </div>
+
+            <!-- @COMPONENT: BottomNavigation -->
+            <div class="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-md bg-white border-t border-border">
+                <div class="grid grid-cols-4 gap-1">
+                    <button onclick="showScreen('home-feed')" class="p-4 text-muted-foreground hover:text-foreground text-center">
+                        <i class="fas fa-home text-lg mb-1"></i>
+                        <p class="text-xs font-medium">Home</p>
+                    </button>
+                    <button class="p-4 bg-primary text-primary-foreground text-center">
+                        <i class="fas fa-search text-lg mb-1"></i>
+                        <p class="text-xs font-medium">Search</p>
+                    </button>
+                    <button onclick="showScreen('wallet')" class="p-4 text-muted-foreground hover:text-foreground text-center">
+                        <i class="fas fa-wallet text-lg mb-1"></i>
+                        <p class="text-xs font-medium">Wallet</p>
+                    </button>
+                    <button onclick="showScreen('profile')" class="p-4 text-muted-foreground hover:text-foreground text-center">
+                        <i class="fas fa-user text-lg mb-1"></i>
+                        <p class="text-xs font-medium">Profile</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Confirm Booking Screen -->
+        <div id="confirm-booking" class="screen">
+            <!-- @COMPONENT: BookingHeader -->
+            <div class="flex items-center justify-between p-4 border-b border-border">
+                <button onclick="showScreen('worker-profile')" class="p-2 hover:bg-secondary rounded-lg">
+                    <i class="fas fa-arrow-left text-foreground"></i>
+                </button>
+                <h1 class="text-lg font-semibold text-foreground">Confirm Booking</h1>
+                <div class="w-10"></div>
+            </div>
+
+            <div class="p-4">
+                <!-- @COMPONENT: WorkerSummary -->
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="relative">
+                        <!-- Same worker photo as before -->
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=60&h=60" alt="Anita Sharma" class="w-12 h-12 rounded-full object-cover" />
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-semibold text-foreground" data-bind="booking.worker.name">Anita Sharma</h3>
+                        <p class="text-muted-foreground text-sm" data-bind="booking.worker.service">House Cleaning • 3 yrs exp</p>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-lg font-bold text-foreground" data-bind="booking.worker.rate">₹22/hr</span>
+                    </div>
+                </div>
+
+                <!-- @COMPONENT: BookingDetails -->
+                <div class="bg-card border border-border rounded-xl p-4 mb-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <div>
+                            <h4 class="font-semibold text-foreground" data-bind="booking.date">Tue, 18 Jun</h4>
+                            <p class="text-muted-foreground text-sm" data-bind="booking.time">10:00 AM • Within 5 km</p>
+                        </div>
+                        <button class="text-accent text-sm font-medium hover:underline">Change</button>
+                    </div>
+                </div>
+
+                <!-- @COMPONENT: DurationSelection -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-foreground mb-4">Duration</h3>
+                    <div class="grid grid-cols-3 gap-3 mb-3">
+                        <button class="p-3 border border-border rounded-lg text-center hover:border-primary transition-colors">
+                            <div class="font-semibold text-foreground">2 hrs</div>
+                        </button>
+                        <button class="p-3 bg-primary text-primary-foreground rounded-lg text-center">
+                            <div class="font-semibold">3 hrs</div>
+                        </button>
+                        <button class="p-3 border border-border rounded-lg text-center hover:border-primary transition-colors">
+                            <div class="font-semibold text-foreground">4 hrs</div>
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-3 gap-3 mb-3">
+                        <button class="p-3 border border-border rounded-lg text-center hover:border-primary transition-colors">
+                            <div class="font-semibold text-foreground">5 hrs</div>
+                        </button>
+                        <button class="p-3 border border-border rounded-lg text-center hover:border-primary transition-colors">
+                            <div class="font-semibold text-foreground">6 hrs</div>
+                        </button>
+                        <button class="p-3 border border-border rounded-lg text-center hover:border-primary transition-colors">
+                            <div class="font-semibold text-foreground">Full day</div>
+                        </button>
+                    </div>
+                    <p class="text-muted-foreground text-sm">Average for similar jobs: 3.2 hrs</p>
+                </div>
+
+                <!-- @COMPONENT: AddOns -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-foreground mb-4">Add-ons</h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <button class="p-3 border border-border rounded-lg text-left hover:border-primary transition-colors">
+                            <div class="font-medium text-foreground">Inside fridge</div>
+                            <div class="text-muted-foreground text-sm">+₹8</div>
+                        </button>
+                        <button class="p-3 border border-border rounded-lg text-left hover:border-primary transition-colors">
+                            <div class="font-medium text-foreground">Inside oven</div>
+                            <div class="text-muted-foreground text-sm">+₹10</div>
+                        </button>
+                        <button class="p-3 border border-border rounded-lg text-left hover:border-primary transition-colors">
+                            <div class="font-medium text-foreground">Balcony</div>
+                            <div class="text-muted-foreground text-sm">+₹8</div>
+                        </button>
+                    </div>
+                    <button class="mt-3 p-3 border border-border rounded-lg text-left w-full hover:border-primary transition-colors">
+                        <div class="font-medium text-foreground">Eco products</div>
+                        <div class="text-muted-foreground text-sm">+₹4</div>
+                    </button>
+                </div>
+
+                <!-- @COMPONENT: AddressSection -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-foreground mb-4">Address</h3>
+                    <div class="bg-card border border-border rounded-xl p-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h4 class="font-semibold text-foreground" data-bind="booking.address.label">Home • 221B Baker Street</h4>
+                                <p class="text-muted-foreground text-sm" data-bind="booking.address.full">Apt 4C, London NW1</p>
+                            </div>
+                            <button class="text-accent text-sm font-medium hover:underline">Edit</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- @COMPONENT: PaymentMethod -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-foreground mb-4">Payment</h3>
+                    <div class="bg-card border border-border rounded-xl p-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <i class="fab fa-cc-visa text-blue-600 text-xl"></i>
+                                <span class="font-medium text-foreground" data-bind="payment.method">Visa •••• 4242</span>
+                            </div>
+                            <button class="text-accent text-sm font-medium hover:underline">Change</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- @COMPONENT: PricingBreakdown -->
+                <div class="bg-secondary rounded-xl p-4 mb-6">
+                    <div class="space-y-2">
+                        <div class="flex justify-between">
+                            <span class="text-muted-foreground">Hourly rate</span>
+                            <span class="font-medium text-foreground" data-bind="pricing.hourlyRate">₹22</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-muted-foreground">Duration</span>
+                            <span class="font-medium text-foreground" data-bind="pricing.duration">3 hrs</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-muted-foreground">Add-ons</span>
+                            <span class="font-medium text-foreground" data-bind="pricing.addons">₹0</span>
+                        </div>
+                        <hr class="border-border my-3" />
+                        <div class="flex justify-between text-lg">
+                            <span class="font-semibold text-foreground">Total</span>
+                            <span class="font-bold text-foreground" data-bind="pricing.total">₹66</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- @COMPONENT: ConfirmButton -->
+                <div class="mb-20">
+                    <button onclick="showScreen('booking-confirmed')" class="w-full bg-primary text-primary-foreground py-4 rounded-xl font-semibold text-base hover:bg-primary/90 transition-colors">
+                        Confirm and Pay ₹66
+                    </button>
+                </div>
+            </div>
+
+            <!-- @COMPONENT: BottomNavigation -->
+            <div class="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-md bg-white border-t border-border">
+                <div class="grid grid-cols-4 gap-1">
+                    <button onclick="showScreen('home-feed')" class="p-4 text-muted-foreground hover:text-foreground text-center">
+                        <i class="fas fa-home text-lg mb-1"></i>
+                        <p class="text-xs font-medium">Home</p>
+                    </button>
+                    <button class="p-4 bg-primary text-primary-foreground text-center">
+                        <i class="fas fa-search text-lg mb-1"></i>
+                        <p class="text-xs font-medium">Search</p>
+                    </button>
+                    <button onclick="showScreen('wallet')" class="p-4 text-muted-foreground hover:text-foreground text-center">
+                        <i class="fas fa-wallet text-lg mb-1"></i>
+                        <p class="text-xs font-medium">Wallet</p>
+                    </button>
+                    <button onclick="showScreen('profile')" class="p-4 text-muted-foreground hover:text-foreground text-center">
+                        <i class="fas fa-user text-lg mb-1"></i>
+                        <p class="text-xs font-medium">Profile</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Booking Confirmed Screen -->
+        <div id="booking-confirmed" class="screen">
+            <!-- @COMPONENT: ConfirmationHeader -->
+            <div class="text-center pt-16 pb-8 px-6">
+                <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-check text-green-600 text-2xl"></i>
+                </div>
+                <h1 class="text-2xl font-bold text-foreground mb-2">Booking Confirmed!</h1>
+                <p class="text-muted-foreground">Your cleaning is scheduled with Anita</p>
+            </div>
+
+            <!-- @COMPONENT: BookingSummary -->
+            <div class="px-6 mb-8">
+                <div class="bg-card border border-border rounded-xl p-4">
+                    <div class="flex items-center gap-4 mb-4">
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=60&h=60" alt="Anita Sharma" class="w-12 h-12 rounded-full object-cover" />
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-foreground">Anita Sharma</h3>
+                            <p class="text-muted-foreground text-sm">House Cleaning • 3 hrs</p>
+                        </div>
+                        <div class="text-right">
+                            <div class="font-bold text-foreground">₹66</div>
+                            <div class="text-muted-foreground text-sm">Total</div>
+                        </div>
+                    </div>
+                    <div class="border-t border-border pt-4">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-calendar text-primary"></i>
+                            <span class="text-foreground">Tue, 18 Jun • 10:00 AM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- @COMPONENT: NextSteps -->
+            <div class="px-6 mb-8">
+                <h3 class="text-lg font-semibold text-foreground mb-4">What happens next?</h3>
+                <div class="space-y-3">
+                    <div class="flex items-start gap-3">
+                        <div class="w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-sm font-bold">1</div>
+                        <div>
+                            <p class="font-medium text-foreground">Anita will arrive on time</p>
+                            <p class="text-muted-foreground text-sm">You'll get a notification when she's on her way</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-sm font-bold">2</div>
+                        <div>
+                            <p class="font-medium text-foreground">Payment held securely</p>
+                            <p class="text-muted-foreground text-sm">Released after job completion</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-sm font-bold">3</div>
+                        <div>
+                            <p class="font-medium text-foreground">Rate your experience</p>
+                            <p class="text-muted-foreground text-sm">Help others find great service providers</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- @COMPONENT: QuickActions -->
+            <div class="px-6 space-y-3 mb-8">
+                <button class="w-full flex items-center gap-3 p-4 bg-card border border-border rounded-xl hover:shadow-md transition-all">
+                    <i class="fas fa-comments text-primary"></i>
+                    <span class="font-medium text-foreground">Message Anita</span>
+                    <i class="fas fa-chevron-right text-muted-foreground ml-auto"></i>
+                </button>
+                <button class="w-full flex items-center gap-3 p-4 bg-card border border-border rounded-xl hover:shadow-md transition-all">
+                    <i class="fas fa-calendar-alt text-primary"></i>
+                    <span class="font-medium text-foreground">View booking details</span>
+                    <i class="fas fa-chevron-right text-muted-foreground ml-auto"></i>
+                </button>
+                <button class="w-full flex items-center gap-3 p-4 bg-card border border-border rounded-xl hover:shadow-md transition-all">
+                    <i class="fas fa-redo text-primary"></i>
+                    <span class="font-medium text-foreground">Book again</span>
+                    <i class="fas fa-chevron-right text-muted-foreground ml-auto"></i>
+                </button>
+            </div>
+
+            <!-- @COMPONENT: BackToHome -->
+            <div class="px-6 pb-8">
+                <button onclick="showScreen('home-feed')" class="w-full bg-secondary text-secondary-foreground py-4 rounded-xl font-semibold text-base hover:bg-secondary/80 transition-colors">
+                    Back to Home
+                </button>
+            </div>
+        </div>
+
+        <!-- Employer Onboarding Screen -->
+        <div id="employer-onboarding" class="screen">
+            <!-- @COMPONENT: OnboardingHeader -->
+            <div class="flex items-center justify-between p-4 border-b border-border">
+                <button onclick="showScreen('home-feed')" class="p-2 hover:bg-secondary rounded-lg">
+                    <i class="fas fa-arrow-left text-foreground"></i>
+                </button>
+                <div class="flex items-center gap-2">
+                    <h1 class="text-lg font-semibold text-foreground">SheWorks</h1>
+                    <span class="bg-accent text-accent-foreground text-xs px-2 py-1 rounded-full font-medium">Beta</span>
+                </div>
+                <div class="w-10"></div>
+            </div>
+
+            <div class="p-6">
+                <!-- @COMPONENT: OnboardingTitle -->
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl font-bold text-foreground mb-2">Tell us what you need</h2>
+                    <p class="text-muted-foreground text-sm">We'll tailor results for your home or business. Select a service to continue.</p>
+                </div>
+
+                <!-- @COMPONENT: ServiceSelection -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-foreground mb-4">Choose a service</h3>
+                    <div class="space-y-3">
+                        <button class="w-full p-4 bg-card border border-border rounded-xl text-left hover:border-primary transition-all">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-broom text-accent text-lg"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-semibold text-foreground">Home Cleaning</h4>
+                                    <p class="text-muted-foreground text-sm">Regular, deep clean, move-in/out</p>
+                                </div>
+                            </div>
+                        </button>
+
+                        <button class="w-full p-4 bg-card border border-border rounded-xl text-left hover:border-primary transition-all">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-heart text-accent text-lg"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-semibold text-foreground">Caregiving</h4>
+                                    <p class="text-muted-foreground text-sm">Child, senior, or special needs care</p>
+                                </div>
+                            </div>
+                        </button>
+
+                        <button class="w-full p-4 bg-card border border-border rounded-xl text-left hover:border-primary transition-all">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-spa text-accent text-lg"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-semibold text-foreground">Salon & Spa at Home</h4>
+                                    <p class="text-muted-foreground text-sm">Beauty, grooming, bridal services</p>
+                                </div>
+                            </div>
+                        </button>
+
+                        <button class="w-full p-4 bg-card border border-border rounded-xl text-left hover:border-primary transition-all">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-clock text-accent text-lg"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-semibold text-foreground">Part-time / On-demand</h4>
+                                    <p class="text-muted-foreground text-sm">Hourly help for chores or errands</p>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- @COMPONENT: LocationAndTime -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-foreground mb-4">Location & time</h3>
+                    <div class="space-y-3">
+                        <input type="text" placeholder="Add address" class="w-full p-3 border border-border rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent" data-mock="true" />
+                        <div class="grid grid-cols-2 gap-3">
+                            <input type="date" placeholder="Pick a date" class="w-full p-3 border border-border rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent" data-mock="true" />
+                            <input type="time" placeholder="Pick a time" class="w-full p-3 border border-border rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent" data-mock="true" />
+                        </div>
+                    </div>
+                    <p class="text-muted-foreground text-sm mt-2">We'll only show available workers in your area.</p>
+                </div>
+
+                <!-- @COMPONENT: NoCommitmentNote -->
+                <div class="bg-secondary rounded-xl p-4 mb-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-muted-foreground text-sm">No commitment yet. You'll confirm on the next step.</p>
+                        </div>
+                        <button onclick="showScreen('home-search')" class="bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors">
+                            See Matches
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- @COMPONENT: BottomNavigation -->
+            <div class="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-md bg-white border-t border-border">
+                <div class="grid grid-cols-4 gap-1">
+                    <button class="p-4 bg-primary text-primary-foreground text-center">
+                        <i class="fas fa-home text-lg mb-1"></i>
+                        <p class="text-xs font-medium">Home</p>
+                    </button>
+                    <button onclick="showScreen('home-search')" class="p-4 text-muted-foreground hover:text-foreground text-center">
+                        <i class="fas fa-search text-lg mb-1"></i>
+                        <p class="text-xs font-medium">Search</p>
+                    </button>
+                    <button onclick="showScreen('wallet')" class="p-4 text-muted-foreground hover:text-foreground text-center">
+                        <i class="fas fa-wallet text-lg mb-1"></i>
+                        <p class="text-xs font-medium">Wallet</p>
+                    </button>
+                    <button onclick="showScreen('profile')" class="p-4 text-muted-foreground hover:text-foreground text-center">
+                        <i class="fas fa-user text-lg mb-1"></i>
+                        <p class="text-xs font-medium">Profile</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Worker Dashboard Screen -->
+        <div id="worker-dashboard" class="screen">
+            <!-- @COMPONENT: WorkerHeader -->
+            <div class="bg-white sticky top-0 z-10 border-b border-border">
+                <div class="flex items-center justify-between p-4">
+                    <div>
+                        <h1 class="text-lg font-semibold text-foreground">Good morning</h1>
+                        <p class="text-muted-foreground text-sm" data-bind="worker.name">Anita</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <button class="relative p-2 hover:bg-secondary rounded-lg">
+                            <i class="fas fa-bell text-foreground text-lg"></i>
+                            <span class="absolute -top-1 -right-1 w-4 h-4 bg-destructive text-destructive-foreground text-xs rounded-full flex items-center justify-center">3</span>
+                        </button>
+                        <button onclick="showScreen('profile')" class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
+                            <i class="fas fa-user-circle text-primary"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4">
+                <!-- @COMPONENT: AvailabilityToggle -->
+                <div class="bg-gradient-to-r from-primary to-emerald-500 rounded-xl p-6 mb-6 text-white">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <h2 class="text-xl font-bold">You're online</h2>
+                            <p class="text-primary-foreground/80">Ready to receive bookings</p>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" checked class="sr-only peer" data-implementation="Toggle availability status" />
+                            <div class="w-14 h-8 bg-white/20 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-6 after:content-[''] after:absolute after:top-1 after:left-1 after:bg-white after:rounded-full after:h-6 after:w-6 after:transition-all"></div>
+                        </label>
+                    </div>
+                    <div class="grid grid-cols-3 gap-4 text-center">
+                        <div>
+                            <div class="text-2xl font-bold" data-bind="stats.todayEarnings">₹1,200</div>
+                            <div class="text-primary-foreground/80 text-sm">Today</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold" data-bind="stats.weekEarnings">₹8,500</div>
+                            <div class="text-primary-foreground/80 text-sm">This week</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold" data-bind="stats.rating">4.8★</div>
+                            <div class="text-primary-foreground/80 text-sm">Rating</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- @COMPONENT: QuickActions -->
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <button onclick="showScreen('wallet')" class="p-4 bg-card border border-border rounded-xl text-center hover:shadow-md transition-all">
+                        <i class="fas fa-wallet text-primary text-2xl mb-2"></i>
+                        <p class="font-semibold text-foreground">Wallet</p>
+                        <p class="text-muted-foreground text-sm">₹12,540</p>
+                    </button>
+                    <button class="p-4 bg-card border border-border rounded-xl text-center hover:shadow-md transition-all">
+                        <i class="fas fa-calendar text-primary text-2xl mb-2"></i>
+                        <p class="font-semibold text-foreground">Schedule</p>
+                        <p class="text-muted-foreground text-sm">3 upcoming</p>
+                    </button>
+                </div>
+
+                <!-- @COMPONENT: PendingJobs -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-foreground mb-4">Pending requests</h3>
+                    <div class="space-y-3">
+                        <!-- @MAP: pendingJobs.map(job => ( -->
+                        <div class="bg-card border border-border rounded-xl p-4 hover:shadow-md transition-all" data-mock="true">
+                            <div class="flex items-start justify-between mb-3">
+                                <div>
+                                    <h4 class="font-semibold text-foreground" data-bind="job.title">House Cleaning</h4>
+                                    <p class="text-muted-foreground text-sm" data-bind="job.location">Baker Street • 2.5 km away</p>
+                                </div>
+                                <span class="text-lg font-bold text-foreground" data-bind="job.payment">₹66</span>
+                            </div>
+                            <div class="flex items-center gap-2 mb-3">
+                                <i class="fas fa-clock text-muted-foreground text-sm"></i>
+                                <span class="text-sm text-muted-foreground" data-bind="job.datetime">Today, 10:00 AM • 3 hrs</span>
+                            </div>
+                            <div class="flex gap-3">
+                                <button class="flex-1 py-2 border border-border rounded-lg text-center font-medium text-foreground hover:bg-secondary transition-colors">
+                                    Decline
+                                </button>
+                                <button class="flex-1 py-2 bg-primary text-primary-foreground rounded-lg text-center font-medium hover:bg-primary/90 transition-colors">
+                                    Accept
+                                </button>
+                            </div>
+                        </div>
+                        <!-- @END_MAP )) -->
+                    </div>
+                </div>
+
+                <!-- @COMPONENT: UpcomingJobs -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-foreground mb-4">Upcoming jobs</h3>
+                    <div class="space-y-3">
+                        <!-- @MAP: upcomingJobs.map(job => ( -->
+                        <div class="bg-card border border-border rounded-xl p-4" data-mock="true">
+                            <div class="flex items-start justify-between mb-3">
+                                <div>
+                                    <h4 class="font-semibold text-foreground" data-bind="job.title">Elderly Care</h4>
+                                    <p class="text-muted-foreground text-sm" data-bind="job.client">Mrs. Sharma • Andheri</p>
+                                </div>
+                                <span class="bg-primary/10 text-primary text-xs px-2 py-1 rounded font-medium">Confirmed</span>
+                            </div>
+                            <div class="flex items-center gap-2 mb-3">
+                                <i class="fas fa-clock text-muted-foreground text-sm"></i>
+                                <span class="text-sm text-muted-foreground" data-bind="job.datetime">Tomorrow, 2:00 PM • 6 hrs</span>
+                            </div>
+                            <div class="flex gap-3">
+                                <button class="px-4 py-2 bg-secondary text-secondary-foreground rounded-lg text-sm font-medium hover:bg-secondary/80 transition-colors">
+                                    <i class="fas fa-map-marker-alt mr-1"></i>
+                                    Directions
+                                </button>
+                                <button class="px-4 py-2 bg-secondary text-secondary-foreground rounded-lg text-sm font-medium hover:bg-secondary/80 transition-colors">
+                                    <i class="fas fa-phone mr-1"></i>
+                                    Contact
+                                </button>
+                            </div>
+                        </div>
+                        <!-- @END_MAP )) -->
+                    </div>
+                </div>
+
+                <!-- @COMPONENT: SafetyButton -->
+                <div class="bg-destructive/10 border border-destructive/20 rounded-xl p-4 mb-20">
+                    <div class="flex items-center gap-3">
+                        <i class="fas fa-shield-alt text-destructive text-xl"></i>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-foreground">Safety first</h4>
+                            <p class="text-muted-foreground text-sm">Tap if you need help or feel unsafe</p>
+                        </div>
+                        <button class="bg-destructive text-destructive-foreground px-4 py-2 rounded-lg font-semibold hover:bg-destructive/90 transition-colors">
+                            SOS
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- @COMPONENT: BottomNavigation -->
+            <div class="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-md bg-white border-t border-border">
+                <div class="grid grid-cols-4 gap-1">
+                    <button class="p-4 bg-primary text-primary-foreground text-center">
+                        <i class="fas fa-home text-lg mb-1"></i>
+                        <p class="text-xs font-medium">Home</p>
+                    </button>
+                    <button class="p-4 text-muted-foreground hover:text-foreground text-center">
+                        <i class="fas fa-search text-lg mb-1"></i>
+                        <p class="text-xs font-medium">Jobs</p>
+                    </button>
+                    <button onclick="showScreen('wallet')" class="p-4 text-muted-foreground hover:text-foreground text-center">
+                        <i class="fas fa-wallet text-lg mb-1"></i>
+                        <p class="text-xs font-medium">Wallet</p>
+                    </button>
+                    <button onclick="showScreen('profile')" class="p-4 text-muted-foreground hover:text-foreground text-center">
+                        <i class="fas fa-user text-lg mb-1"></i>
+                        <p class="text-xs font-medium">Profile</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wallet Screen -->
+        <div id="wallet" class="screen">
+            <!-- @COMPONENT: WalletHeader -->
+            <div class="flex items-center justify-between p-4 border-b border-border">
+                <button onclick="showScreen('home-feed')" class="p-2 hover:bg-secondary rounded-lg">
+                    <i class="fas fa-arrow-left text-foreground"></i>
+                </button>
+                <h1 class="text-lg font-semibold text-foreground">Wallet</h1>
+                <button class="p-2 hover:bg-secondary rounded-lg">
+                    <i class="fas fa-ellipsis-v text-foreground"></i>
+                </button>
+            </div>
+
+            <div class="p-4">
+                <!-- @COMPONENT: CurrentBalance -->
+                <div class="text-center mb-6">
+                    <p class="text-muted-foreground text-sm mb-2">Current balance</p>
+                    <h2 class="text-4xl font-bold text-foreground mb-4" data-bind="wallet.balance">₹12,540</h2>
+                    <div class="flex justify-center gap-4">
+                        <button class="px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors">
+                            Add
+                        </button>
+                        <button class="px-6 py-3 bg-secondary text-secondary-foreground rounded-lg font-semibold hover:bg-secondary/80 transition-colors">
+                            Send
+                        </button>
+                    </div>
+                </div>
+
+                <!-- @COMPONENT: QuickStats -->
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div class="bg-orange-50 border border-orange-200 rounded-xl p-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-orange-700 text-sm font-medium">Pending</p>
+                                <p class="text-orange-900 text-xl font-bold" data-bind="wallet.pending">₹1,200</p>
+                            </div>
+                            <i class="fas fa-clock text-orange-500"></i>
+                        </div>
+                    </div>
+                    <div class="bg-green-50 border border-green-200 rounded-xl p-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-green-700 text-sm font-medium">This month</p>
+                                <p class="text-green-900 text-xl font-bold" data-bind="wallet.thisMonth">₹18,300</p>
+                            </div>
+                            <i class="fas fa-trending-up text-green-500"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- @COMPONENT: TransactionTabs -->
+                <div class="mb-4">
+                    <h3 class="text-lg font-semibold text-foreground mb-4">Transactions</h3>
+                    <div class="flex gap-1 bg-secondary rounded-lg p-1">
+                        <button class="flex-1 py-2 bg-white rounded-md text-sm font-medium text-foreground shadow-sm">All</button>
+                        <button class="flex-1 py-2 text-sm font-medium text-muted-foreground hover:text-foreground">Earnings</button>
+                        <button class="flex-1 py-2 text-sm font-medium text-muted-foreground hover:text-foreground">Payouts</button>
+                    </div>
+                </div>
+
+                <!-- @COMPONENT: TransactionList -->
+                <div class="space-y-4 mb-20">
+                    <!-- @MAP: transactions.map(transaction => ( -->
+                    <div class="flex items-center gap-4 py-3" data-mock="true">
+                        <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-broom text-green-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-foreground" data-bind="transaction.title">Cleaning - Baker St</h4>
+                            <p class="text-muted-foreground text-sm" data-bind="transaction.details">18 Jun • 3 hrs • Completed</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-green-600 font-bold" data-bind="transaction.amount">+₹1,200</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4 py-3" data-mock="true">
+                        <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-university text-red-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-foreground" data-bind="transaction.title">Payout to Bank</h4>
+                            <p class="text-muted-foreground text-sm" data-bind="transaction.details">16 Jun • HDFC ••••9210</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-red-600 font-bold" data-bind="transaction.amount">-₹5,000</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4 py-3" data-mock="true">
+                        <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-heart text-green-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-foreground" data-bind="transaction.title">Elderly Care - Andheri</h4>
+                            <p class="text-muted-foreground text-sm" data-bind="transaction.details">12 Jun • 6 hrs • Completed</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-green-600 font-bold" data-bind="transaction.amount">+₹2,400</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4 py-3" data-mock="true">
+                        <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-mobile-alt text-red-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-foreground" data-bind="transaction.title">Payout to UPI</h4>
+                            <p class="text-muted-foreground text-sm" data-bind="transaction.details">09 Jun • anita@upi</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-red-600 font-bold" data-bind="transaction.amount">-₹3,000</span>
+                        </div>
+                    </div>
+                    <!-- @END_MAP )) -->
+                </div>
+
+                <!-- @COMPONENT: LinkedAccounts -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-foreground mb-4">Linked accounts</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-4 bg-card border border-border rounded-xl">
+                            <div class="flex items-center gap-3">
+                                <i class="fas fa-university text-blue-600"></i>
+                                <div>
+                                    <h4 class="font-semibold text-foreground">HDFC Bank</h4>
+                                    <p class="text-muted-foreground text-sm">••••9210 • Primary</p>
+                                </div>
+                            </div>
+                            <button class="text-primary text-sm font-medium hover:underline">Manage</button>
+                        </div>
+                        <div class="flex items-center justify-between p-4 bg-card border border-border rounded-xl">
+                            <div class="flex items-center gap-3">
+                                <i class="fas fa-mobile-alt text-purple-600"></i>
+                                <div>
+                                    <h4 class="font-semibold text-foreground">UPI</h4>
+                                    <p class="text-muted-foreground text-sm">anita@upi</p>
+                                </div>
+                            </div>
+                            <button class="text-primary text-sm font-medium hover:underline">Manage</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- @COMPONENT: WithdrawButton -->
+                <div class="mb-20">
+                    <button class="w-full bg-primary text-primary-foreground py-4 rounded-xl font-semibold text-base hover:bg-primary/90 transition-colors">
+                        Withdraw to bank
+                    </button>
+                </div>
+            </div>
+
+            <!-- @COMPONENT: BottomNavigation -->
+            <div class="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-md bg-white border-t border-border">
+                <div class="grid grid-cols-4 gap-1">
+                    <button onclick="showScreen('home-feed')" class="p-4 text-muted-foreground hover:text-foreground text-center">
+                        <i class="fas fa-home text-lg mb-1"></i>
+                        <p class="text-xs font-medium">Home</p>
+                    </button>
+                    <button class="p-4 text-muted-foreground hover:text-foreground text-center">
+                        <i class="fas fa-search text-lg mb-1"></i>
+                        <p class="text-xs font-medium">Search</p>
+                    </button>
+                    <button class="p-4 bg-primary text-primary-foreground text-center">
+                        <i class="fas fa-wallet text-lg mb-1"></i>
+                        <p class="text-xs font-medium">Wallet</p>
+                    </button>
+                    <button onclick="showScreen('profile')" class="p-4 text-muted-foreground hover:text-foreground text-center">
+                        <i class="fas fa-user text-lg mb-1"></i>
+                        <p class="text-xs font-medium">Profile</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Screen -->
+        <div id="profile" class="screen">
+            <!-- @COMPONENT: ProfileHeader -->
+            <div class="flex items-center justify-between p-4 border-b border-border">
+                <button onclick="showScreen('home-feed')" class="p-2 hover:bg-secondary rounded-lg">
+                    <i class="fas fa-arrow-left text-foreground"></i>
+                </button>
+                <h1 class="text-lg font-semibold text-foreground">Profile</h1>
+                <button class="p-2 hover:bg-secondary rounded-lg">
+                    <i class="fas fa-edit text-foreground"></i>
+                </button>
+            </div>
+
+            <div class="p-4">
+                <!-- @COMPONENT: ProfileInfo -->
+                <div class="text-center mb-8">
+                    <div class="relative inline-block mb-4">
+                        <!-- Professional headshot of the user -->
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=120&h=120" alt="Anita Sharma" class="w-20 h-20 rounded-full object-cover mx-auto" />
+                        <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-primary rounded-full flex items-center justify-center">
+                            <i class="fas fa-check text-white text-sm"></i>
+                        </div>
+                    </div>
+                    <h2 class="text-xl font-bold text-foreground mb-1" data-bind="user.name">Anita Sharma</h2>
+                    <p class="text-muted-foreground text-sm mb-2" data-bind="user.role">Caregiver • Mumbai</p>
+                    <div class="flex items-center justify-center gap-2">
+                        <div class="flex items-center gap-1">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <span class="font-semibold" data-bind="user.rating">4.8</span>
+                        </div>
+                        <span class="text-muted-foreground" data-bind="user.reviewCount">132 reviews</span>
+                    </div>
+                </div>
+
+                <!-- @COMPONENT: PersonalInfo -->
+                <div class="mb-8">
+                    <h3 class="text-lg font-semibold text-foreground mb-4">Your info</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between p-4 bg-card border border-border rounded-xl">
+                            <div>
+                                <h4 class="font-semibold text-foreground">Phone</h4>
+                                <p class="text-muted-foreground text-sm" data-bind="user.phone">+91 98765 43210</p>
+                            </div>
+                            <button class="text-primary text-sm font-medium hover:underline">Update</button>
+                        </div>
+                        <div class="flex items-center justify-between p-4 bg-card border border-border rounded-xl">
+                            <div>
+                                <h4 class="font-semibold text-foreground">Email</h4>
+                                <p class="text-muted-foreground text-sm" data-bind="user.email">anita@example.com</p>
+                            </div>
+                            <button class="text-primary text-sm font-medium hover:underline">Update</button>
+                        </div>
+                        <div class="flex items-center justify-between p-4 bg-card border border-border rounded-xl">
+                            <div>
+                                <h4 class="font-semibold text-foreground">Service areas</h4>
+                                <p class="text-muted-foreground text-sm" data-bind="user.serviceAreas">Andheri, Bandra, Juhu</p>
+                            </div>
+                            <button class="text-primary text-sm font-medium hover:underline">Manage</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- @COMPONENT: ProfessionalInfo -->
+                <div class="mb-8">
+                    <h3 class="text-lg font-semibold text-foreground mb-4">Professional</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between p-4 bg-card border border-border rounded-xl">
+                            <div>
+                                <h4 class="font-semibold text-foreground">Skills</h4>
+                                <p class="text-muted-foreground text-sm" data-bind="user.skills">Elderly care, Housekeeping, First aid</p>
+                            </div>
+                            <button class="text-primary text-sm font-medium hover:underline">Edit</button>
+                        </div>
+                        <div class="flex items-center justify-between p-4 bg-card border border-border rounded-xl">
+                            <div>
+                                <h4 class="font-semibold text-foreground">Verification</h4>
+                                <p class="text-muted-foreground text-sm" data-bind="user.verification">Aadhaar • Police check • Address</p>
+                            </div>
+                            <span class="bg-primary/10 text-primary text-xs px-2 py-1 rounded font-medium">Verified</span>
+                        </div>
+                        <div class="flex items-center justify-between p-4 bg-card border border-border rounded-xl">
+                            <div>
+                                <h4 class="font-semibold text-foreground">Hourly rate</h4>
+                                <p class="text-muted-foreground text-sm" data-bind="user.rate">₹400 / hr</p>
+                            </div>
+                            <button class="text-primary text-sm font-medium hover:underline">Change</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- @COMPONENT: Preferences -->
+                <div class="mb-8">
+                    <h3 class="text-lg font-semibold text-foreground mb-4">Preferences</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between p-4 bg-card border border-border rounded-xl">
+                            <div>
+                                <h4 class="font-semibold text-foreground">Notifications</h4>
+                                <p class="text-muted-foreground text-sm">Job alerts, messages</p>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" checked class="sr-only peer" />
+                                <div class="w-11 h-6 bg-secondary peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-ring/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                            </label>
+                        </div>
+                        <div class="flex items-center justify-between p-4 bg-card border border-border rounded-xl">
+                            <div>
+                                <h4 class="font-semibold text-foreground">Languages</h4>
+                                <p class="text-muted-foreground text-sm">Hindi, Marathi, English</p>
+                            </div>
+                            <button class="text-primary text-sm font-medium hover:underline">Edit</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- @COMPONENT: Support -->
+                <div class="mb-8">
+                    <h3 class="text-lg font-semibold text-foreground mb-4">Support</h3>
+                    <div class="space-y-3">
+                        <button class="w-full flex items-center justify-between p-4 bg-card border border-border rounded-xl hover:shadow-md transition-all">
+                            <div class="text-left">
+                                <h4 class="font-semibold text-foreground">Help & FAQs</h4>
+                                <p class="text-muted-foreground text-sm">Common questions, contact support</p>
+                            </div>
+                            <i class="fas fa-chevron-right text-muted-foreground"></i>
+                        </button>
+                        <button class="w-full flex items-center justify-between p-4 bg-card border border-border rounded-xl hover:shadow-md transition-all">
+                            <div class="text-left">
+                                <h4 class="font-semibold text-foreground">Privacy & Security</h4>
+                                <p class="text-muted-foreground text-sm">Permissions, data control</p>
+                            </div>
+                            <i class="fas fa-chevron-right text-muted-foreground"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- @COMPONENT: LogOut -->
+                <div class="mb-20">
+                    <button onclick="showScreen('landing')" class="w-full flex items-center justify-between p-4 bg-card border border-border rounded-xl hover:shadow-md transition-all">
+                        <div class="text-left">
+                            <h4 class="font-semibold text-foreground">Log out</h4>
+                            <p class="text-muted-foreground text-sm">Sign out of your account</p>
+                        </div>
+                        <i class="fas fa-sign-out-alt text-muted-foreground"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- @COMPONENT: BottomNavigation -->
+            <div class="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-md bg-white border-t border-border">
+                <div class="grid grid-cols-4 gap-1">
+                    <button onclick="showScreen('home-feed')" class="p-4 text-muted-foreground hover:text-foreground text-center">
+                        <i class="fas fa-home text-lg mb-1"></i>
+                        <p class="text-xs font-medium">Home</p>
+                    </button>
+                    <button class="p-4 text-muted-foreground hover:text-foreground text-center">
+                        <i class="fas fa-search text-lg mb-1"></i>
+                        <p class="text-xs font-medium">Search</p>
+                    </button>
+                    <button onclick="showScreen('wallet')" class="p-4 text-muted-foreground hover:text-foreground text-center">
+                        <i class="fas fa-wallet text-lg mb-1"></i>
+                        <p class="text-xs font-medium">Wallet</p>
+                    </button>
+                    <button class="p-4 bg-primary text-primary-foreground text-center">
+                        <i class="fas fa-user text-lg mb-1"></i>
+                        <p class="text-xs font-medium">Profile</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- @END_COMPONENT: AppContainer -->
+
+    <script>
+        // Screen navigation functionality
+        function showScreen(screenId) {
+            // Hide all screens
+            const screens = document.querySelectorAll('.screen');
+            screens.forEach(screen => {
+                screen.classList.remove('active');
+            });
+            
+            // Show selected screen
+            const targetScreen = document.getElementById(screenId);
+            if (targetScreen) {
+                targetScreen.classList.add('active');
+            }
+        }
+
+        // Initialize app
+        (() => {
+            // TODO: Initialize real-time messaging
+            // TODO: Set up push notifications
+            // TODO: Initialize location services
+            // TODO: Set up payment gateway integration
+            
+            console.log('SheWorks app initialized');
+        })();
+
+        // Mock interaction handlers
+        document.addEventListener('DOMContentLoaded', function() {
+            // TODO: Implement real form validation
+            // TODO: Add API integration for user authentication
+            // TODO: Set up real-time updates for job status
+            // TODO: Implement proper state management
+            
+            console.log('DOM loaded, ready for user interactions');
+        });
+    </script>
+</body>
+</html>

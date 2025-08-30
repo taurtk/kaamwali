@@ -74,6 +74,60 @@ export const mockWorkers = [
     profileImage: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80",
     completedJobs: 76,
     avgDuration: "2.5 hrs"
+  },
+  {
+    id: "4",
+    name: "Priya Singh",
+    bio: "Expert in childcare and early education. Patient and nurturing with children of all ages.",
+    skills: ["Childcare", "Tutoring", "Play activities"],
+    hourlyRate: "350",
+    experience: 6,
+    rating: "4.7",
+    reviewCount: 134,
+    isAvailable: false,
+    location: "Delhi",
+    distance: "4.1 km",
+    responseTime: "medium",
+    backgroundCheck: true,
+    profileImage: "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80",
+    completedJobs: 95,
+    avgDuration: "4 hrs"
+  },
+  {
+    id: "5",
+    name: "Kavita Rao",
+    bio: "Skilled in elderly care and companionship. Provides medical assistance and emotional support.",
+    skills: ["Elderly care", "Medical assistance", "Companionship"],
+    hourlyRate: "400",
+    experience: 8,
+    rating: "4.9",
+    reviewCount: 178,
+    isAvailable: true,
+    location: "Bangalore",
+    distance: "2.8 km",
+    responseTime: "fast",
+    backgroundCheck: true,
+    profileImage: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80",
+    completedJobs: 142,
+    avgDuration: "5 hrs"
+  },
+  {
+    id: "6",
+    name: "Meera Joshi",
+    bio: "Professional cook specializing in Indian cuisine. Catering for events and home meals.",
+    skills: ["Cooking", "Catering", "Meal prep"],
+    hourlyRate: "600",
+    experience: 7,
+    rating: "4.8",
+    reviewCount: 112,
+    isAvailable: true,
+    location: "Pune",
+    distance: "3.5 km",
+    responseTime: "medium",
+    backgroundCheck: true,
+    profileImage: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80",
+    completedJobs: 88,
+    avgDuration: "3 hrs"
   }
 ];
 
@@ -113,6 +167,33 @@ export const mockTransactions = [
     type: "payout",
     icon: "fas fa-mobile-alt",
     iconColor: "text-red-600"
+  },
+  {
+    id: "5",
+    title: "Salon Service - Bandra",
+    details: "05 Jun • 2 hrs • Completed",
+    amount: "+₹800",
+    type: "earning",
+    icon: "fas fa-spa",
+    iconColor: "text-green-600"
+  },
+  {
+    id: "6",
+    title: "Childcare - Lower Parel",
+    details: "02 Jun • 4 hrs • Completed",
+    amount: "+₹1,400",
+    type: "earning",
+    icon: "fas fa-child",
+    iconColor: "text-green-600"
+  },
+  {
+    id: "7",
+    title: "Payout to Bank",
+    details: "30 May • SBI ••••4567",
+    amount: "-₹4,500",
+    type: "payout",
+    icon: "fas fa-university",
+    iconColor: "text-red-600"
   }
 ];
 
@@ -137,5 +218,26 @@ export const mockServices = [
     category: "beauty",
     description: "Beauty, grooming, bridal services",
     icon: "fas fa-spa"
+  },
+  {
+    id: "4",
+    name: "Tutoring & Education",
+    category: "education",
+    description: "Academic tutoring, skill development",
+    icon: "fas fa-graduation-cap"
+  },
+  {
+    id: "5",
+    name: "Event Catering",
+    category: "food",
+    description: "Home-cooked meals, party catering",
+    icon: "fas fa-utensils"
+  },
+  {
+    id: "6",
+    name: "Pet Care",
+    category: "pets",
+    description: "Pet sitting, walking, grooming",
+    icon: "fas fa-paw"
   }
 ];
