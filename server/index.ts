@@ -52,16 +52,16 @@ export default app;
   });
 
   // Setup vite in development, serve static files in production
-  if (app.get("env") === "development") {
+  if (app.get("env") === "development" && server) {
     await setupVite(app, server);
   } else {
     serveStatic(app);
   }
 
-  const port = parseInt(process.env.PORT || '5000', 10);
-  const host = process.env.NODE_ENV === "production" ? "0.0.0.0" : "localhost";
-  
-  server.listen(port, host, () => {
-    log(`serving on ${host}:${port}`);
-  });
+const PORT = Number(process.env.PORT) || 4000;
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+});
+
 })();
