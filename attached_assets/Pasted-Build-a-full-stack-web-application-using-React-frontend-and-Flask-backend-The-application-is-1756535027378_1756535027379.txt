@@ -1,0 +1,68 @@
+Build a full-stack web application using React (frontend) and Flask (backend).  
+The application is a women-focused job and service marketplace (maids, caregivers, salon/spa professionals).  
+
+🔹 Core Requirements:
+1. User Types:
+   - Worker (women seeking part-time/full-time/on-demand jobs).
+   - Employer (households, businesses, salons, hospitals).
+
+2. Authentication:
+   - JWT-based login/signup with email/phone.
+   - Role-based access (worker vs employer).
+   - Profile management with photo upload, bio, skills, experience, verification badge.
+
+3. Worker Features:
+   - Dashboard with availability toggle (part-time/full-time/on-demand).
+   - View job offers, accept/decline bookings.
+   - Wallet screen showing earnings, payment history.
+   - Rating & review system for completed jobs.
+
+4. Employer Features:
+   - Dashboard to post job requirements (urgent booking like Rapido OR scheduled jobs like Naukri).
+   - Search/filter workers by skills, location, availability.
+   - Worker profile cards with ratings, reviews, verification badge.
+   - Booking confirmation & secure payment flow.
+
+5. Common Features:
+   - Notifications for new jobs/bookings.
+   - Messaging between worker and employer.
+   - SOS button (worker safety feature).
+   - Admin panel for verifying workers, handling disputes, managing reports.
+
+6. Payments:
+   - Dummy payment gateway integration (Stripe/PayPal placeholder).
+   - Escrow-style: Employer pays → Worker gets funds after job completion.
+
+🔹 Technical Stack:
+- **Frontend**: React, TailwindCSS, React Router, Axios for API calls.
+- **Backend**: Flask (Python), Flask-JWT-Extended for auth, Flask-SQLAlchemy ORM.
+- **Database**: PostgreSQL or MySQL.
+- **APIs**:
+   - Auth APIs: register, login, logout, refresh token.
+   - Worker APIs: update profile, set availability, fetch jobs, accept job, earnings.
+   - Employer APIs: create job, search workers, hire/book worker, review worker.
+   - Payment APIs: create payment, release payment after job completion.
+   - Admin APIs: verify user, suspend account, fetch reports.
+
+🔹 UI Pages to Implement:
+- Landing Page with "Find Work" or "Hire Now" CTA.
+- Auth Pages: Login, Signup (choose Worker/Employer).
+- Worker Dashboard: Profile, Availability, Jobs, Wallet.
+- Employer Dashboard: Post Job, Search Workers, Bookings.
+- Worker Profile Detail Page.
+- Booking Confirmation Page.
+- Wallet & Transactions Page.
+- Admin Panel (basic CRUD for users/jobs).
+
+🔹 Best Practices:
+- Use modular React components with Tailwind for styling.
+- Maintain clean Flask REST API with Blueprints (auth, jobs, payments, admin).
+- Secure all routes with JWT & role-based middleware.
+- Use dotenv for config management.
+- Include README with setup instructions (npm install, flask run, etc.).
+
+Output should include:
+- React frontend code with pages, components, and Axios API integration.
+- Flask backend code with routes, models, and JWT auth.
+- SQLAlchemy models for User, Job, Booking, Payment, Review.
+- Example dummy data seeding script.
